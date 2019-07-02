@@ -15,6 +15,6 @@ public class Animals {
     public Animals(int animals_id, String animals_name) {
         this.animals_id = animals_id;
         this.animals_name = animals_name;
-//        this.id = 0;
+
     }
 }
