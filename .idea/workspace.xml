@@ -317,7 +317,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.EndangeredAnimalsTest">
+  <component name="RunManager" selected="Gradle.NonEndangeredTest">
     <configuration name="EndangeredAnimalsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -358,6 +358,26 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="NonEndangeredTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;models.NonEndangeredTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="SightingsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -380,6 +400,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.NonEndangeredTest" />
         <item itemvalue="Gradle.EndangeredAnimalsTest" />
         <item itemvalue="Gradle.SightingsTest" />
         <item itemvalue="Gradle.EndangeredAnimalsTest.endangered_instantiatesCorrectly_true" />
