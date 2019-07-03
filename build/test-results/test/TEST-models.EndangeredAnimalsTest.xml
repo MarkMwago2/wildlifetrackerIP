@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="models.SightingsTest" tests="9" skipped="0" failures="4" errors="0" timestamp="2019-07-03T08:34:53" hostname="mark-HP-Laptop-15-bs1xx" time="0.05">
+<testsuite name="models.EndangeredAnimalsTest" tests="7" skipped="0" failures="3" errors="0" timestamp="2019-07-03T08:48:42" hostname="mark-HP-Laptop-15-bs1xx" time="0.038">
   <properties/>
-  <testcase name="getLocation_instantiatesWithLocation_String" classname="models.SightingsTest" time="0.02"/>
-  <testcase name="getLocation_instantiatesWithAnimalId_int" classname="models.SightingsTest" time="0.0"/>
-  <testcase name="Sightings_instantiatesCorrectly_true" classname="models.SightingsTest" time="0.0"/>
-  <testcase name="find_returnsAllObjectsWithProvidedId_secondSighting" classname="models.SightingsTest" time="0.027">
+  <testcase name="all_returnsAllInstancesOfEndangeredAnimals_true" classname="models.EndangeredAnimalsTest" time="0.035">
     <failure message="org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP" type="org.sql2o.Sql2oException">org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP
 	at org.sql2o.Connection.createConnection(Connection.java:291)
 	at org.sql2o.Connection.&lt;init&gt;(Connection.java:51)
 	at org.sql2o.Sql2o.open(Sql2o.java:225)
-	at models.Sightings.save(Sightings.java:64)
-	at models.SightingsTest.find_returnsAllObjectsWithProvidedId_secondSighting(SightingsTest.java:63)
+	at models.Animals.save(Animals.java:41)
+	at models.EndangeredAnimals.save(EndangeredAnimals.java:34)
+	at models.EndangeredAnimalsTest.all_returnsAllInstancesOfEndangeredAnimals_true(EndangeredAnimalsTest.java:40)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -65,18 +63,17 @@ Caused by: java.sql.SQLException: No suitable driver found for jdbc:postgresql:/
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
 	at org.sql2o.GenericDatasource.getConnection(GenericDatasource.java:62)
 	at org.sql2o.Connection.createConnection(Connection.java:288)
-	... 53 more
+	... 54 more
 </failure>
   </testcase>
-  <testcase name="equals_returnsTrueIfSightingsObjectsAreTrue_true" classname="models.SightingsTest" time="0.0"/>
-  <testcase name="getLocation_instantiatesWithRangerName_String" classname="models.SightingsTest" time="0.001"/>
-  <testcase name="save_savesSightingsObjectsIntoDatabase" classname="models.SightingsTest" time="0.0">
+  <testcase name="save_savesEndangeredAnimalObjectsIntoDB" classname="models.EndangeredAnimalsTest" time="0.0">
     <failure message="org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP" type="org.sql2o.Sql2oException">org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP
 	at org.sql2o.Connection.createConnection(Connection.java:291)
 	at org.sql2o.Connection.&lt;init&gt;(Connection.java:51)
 	at org.sql2o.Sql2o.open(Sql2o.java:225)
-	at models.Sightings.save(Sightings.java:64)
-	at models.SightingsTest.save_savesSightingsObjectsIntoDatabase(SightingsTest.java:41)
+	at models.Animals.save(Animals.java:41)
+	at models.EndangeredAnimals.save(EndangeredAnimals.java:34)
+	at models.EndangeredAnimalsTest.save_savesEndangeredAnimalObjectsIntoDB(EndangeredAnimalsTest.java:34)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -131,16 +128,20 @@ Caused by: java.sql.SQLException: No suitable driver found for jdbc:postgresql:/
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
 	at org.sql2o.GenericDatasource.getConnection(GenericDatasource.java:62)
 	at org.sql2o.Connection.createConnection(Connection.java:288)
-	... 53 more
+	... 54 more
 </failure>
   </testcase>
-  <testcase name="all_returnsAllObjectsOfSightingsClass_true" classname="models.SightingsTest" time="0.0">
+  <testcase name="endangered_instantiatesCorrectly_true" classname="models.EndangeredAnimalsTest" time="0.0"/>
+  <testcase name="endangered_instantiatesWithAgeOfAnimal_String" classname="models.EndangeredAnimalsTest" time="0.0"/>
+  <testcase name="endangered_instantiatesWithAnimalName_String" classname="models.EndangeredAnimalsTest" time="0.0"/>
+  <testcase name="find_returnsEndangeredAnimalWithSameId_secondAnimal" classname="models.EndangeredAnimalsTest" time="0.0">
     <failure message="org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP" type="org.sql2o.Sql2oException">org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP
 	at org.sql2o.Connection.createConnection(Connection.java:291)
 	at org.sql2o.Connection.&lt;init&gt;(Connection.java:51)
 	at org.sql2o.Sql2o.open(Sql2o.java:225)
-	at models.Sightings.save(Sightings.java:64)
-	at models.SightingsTest.all_returnsAllObjectsOfSightingsClass_true(SightingsTest.java:47)
+	at models.Animals.save(Animals.java:41)
+	at models.EndangeredAnimals.save(EndangeredAnimals.java:34)
+	at models.EndangeredAnimalsTest.find_returnsEndangeredAnimalWithSameId_secondAnimal(EndangeredAnimalsTest.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -195,73 +196,10 @@ Caused by: java.sql.SQLException: No suitable driver found for jdbc:postgresql:/
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
 	at org.sql2o.GenericDatasource.getConnection(GenericDatasource.java:62)
 	at org.sql2o.Connection.createConnection(Connection.java:288)
-	... 53 more
+	... 54 more
 </failure>
   </testcase>
-  <testcase name="save_assignsIdToSavedObject" classname="models.SightingsTest" time="0.0">
-    <failure message="org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP" type="org.sql2o.Sql2oException">org.sql2o.Sql2oException: Could not acquire a connection from DataSource - No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP
-	at org.sql2o.Connection.createConnection(Connection.java:291)
-	at org.sql2o.Connection.&lt;init&gt;(Connection.java:51)
-	at org.sql2o.Sql2o.open(Sql2o.java:225)
-	at models.Sightings.save(Sightings.java:64)
-	at models.SightingsTest.save_assignsIdToSavedObject(SightingsTest.java:56)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48)
-	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:106)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
-	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:66)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
-	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:117)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:155)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:137)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: java.sql.SQLException: No suitable driver found for jdbc:postgresql://localhost:5432/wildlifetrackerIP
-	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:702)
-	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:189)
-	at org.sql2o.GenericDatasource.getConnection(GenericDatasource.java:62)
-	at org.sql2o.Connection.createConnection(Connection.java:288)
-	... 53 more
-</failure>
-  </testcase>
+  <testcase name="endangered_instantiatesWIthAnimalHealth_String" classname="models.EndangeredAnimalsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
