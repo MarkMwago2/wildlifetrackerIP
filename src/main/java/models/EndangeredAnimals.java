@@ -3,7 +3,7 @@ import org.sql2o.*;
 
 import java.util.List;
 
-public class EndangeredAnimals extends Animals{
+public class EndangeredAnimals extends Animals {
     private String health;
     private String age;
 
@@ -21,18 +21,23 @@ public class EndangeredAnimals extends Animals{
         this.age = age;
         endangered = true;
     }
-    public String getName(){return name;}
-    public String getHealth(){
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHealth() {
         return health;
     }
-    public String getAge(){
+
+    public String getAge() {
         return age;
     }
 
     @Override
-    public void save(){
+    public void save() {
         super.save();
-        try(Connection connect= DB.sql2o.open()){
+        try (Connection connect = DB.sql2o.open()) {
             String sql = "UPDATE animals SET health=:health, age=:age WHERE id=:id";
             connect.createQuery(sql, true)
                     .addParameter("health", this.health)
@@ -41,14 +46,16 @@ public class EndangeredAnimals extends Animals{
                     .executeUpdate();
         }
     }
-    public static List<EndangeredAnimals> all(){
+
+    public static List<EndangeredAnimals> all() {
         String sql = "SELECT * FROM animals;";
-        try(Connection connect= DB.sql2o.open()){
+        try (Connection connect = DB.sql2o.open()) {
             return connect.createQuery(sql).executeAndFetch(EndangeredAnimals.class);
         }
     }
-    public static EndangeredAnimals find(int id){
-        try(Connection connect = DB.sql2o.open()){
+
+    public static EndangeredAnimals find(int id) {
+        try (Connection connect = DB.sql2o.open()) {
             String sql = "SELECT * FROM animals WHERE id= :id;";
             EndangeredAnimals animal = connect.createQuery(sql)
                     .addParameter("id", id)
@@ -60,8 +67,9 @@ public class EndangeredAnimals extends Animals{
             return animal;
         }
     }
-    public void update(String name, String health){
-        try(Connection connect = DB.sql2o.open()){
+
+    public void update(String name, String health) {
+        try (Connection connect = DB.sql2o.open()) {
             String sql = "UPDATE animals SET (name, health) = (:name, :health) WHERE id = :id;";
             connect.createQuery(sql)
                     .addParameter("name", name)
