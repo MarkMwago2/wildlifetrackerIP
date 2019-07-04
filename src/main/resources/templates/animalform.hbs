@@ -1,14 +1,47 @@
-{{#partial "content"}}
+ {{#partial "content"}}
     <section class="new-animal">
         <a href="/" class="redirect">Home</a>
         <section class="normal-animal " id="normal">
             <h3>Normal Animal</h3>
             <form action="/new-animal" method="post">
                 <input type="text" name="id" id="" placeholder="Animal Id" required>
-                <input type="text" name="name" id="" placeholder="Name" required>
+                <input type="text" name="name" id="" placeholder="Animal Name" required>
+                <input type="text" name="rangerName" placeholder="rangerName" required>
+                <input type="text" name="Sightinglocation" placeholder="location" required>
+                <div class="age">
+                    <p>Animal's Age</p>
+                    <select name="animalAge" id="animalAge">
+                        <option value="newborn">Newborn</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="health">
+                    <p>Animal's Health</p>
+                    <select name="animalHealth" id="animalHealth">
+                        <option value="weak">Weak</option>
+                        <option value="healthy">Healthy</option>
+                    </select>
+                </div>
+                <hr>
+
+
+                <div class="endangered">
+                    <p>Animal species</p>
+                    <select name="animalType" id="animalType">
+                        <option value="safe">NonEndangered</option>
+                        <option value="endangered">Endangered</option>
+                    </select>
+                </div>
+                <hr>
+                <button type="submit" class="button">Submit</button>
+
+
+
                 <input type="submit" class="btn light">
             </form>
 
-{{/partial}}
+ {{/partial}}
 
 {{> layouts.hbs}}
