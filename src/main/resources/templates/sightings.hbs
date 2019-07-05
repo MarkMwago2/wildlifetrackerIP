@@ -1,6 +1,6 @@
-{{#partial "styles"}}
-    <link rel='stylesheet' href='/css/app.css'>
-{{/partial}}
+<!--{{#partial "styles"}}-->
+<!--    <link rel='stylesheet' href='/css/app.css'>-->
+<!--{{/partial}}-->
 
 {{#partial "content"}}
     <h1>Be on the look out for the following animals from all over the forest</h1>
@@ -22,27 +22,29 @@
         {{#each sightings}}
             <tr>
                 <!--Ranger's Name-->
-                <td>{{name}}</td>
+                <td>{{name}}{{location}}{{animalId}}</td>
+
 
                 <!--Location of Sighting-->
                 <td>{{location}}</td>
 
                 <!--Animal's Name-->
 
-                <td>{{animal.name}}</td>
+                <td>{{animals.name}}</td>
 
                 <!--Animal's Age-->
-                <td>{{animal.age}}</td>
+                <td>{{animals.age}}</td>
 
                 <!--Animal's Health-->
-                <td>{{animal.health}}</td>
+                <td>{{animals.health}}</td>
 
                 <!--Animal's Species-->
-                <td>{{animal.type}}</td>
+                <td>{{animals.type}}</td>
                 <td>{{timestamp}}</td>
             </tr>
         {{/each}}
         </tbody>
     </table>
 {{/partial}}
+
 {{>layout.hbs}}

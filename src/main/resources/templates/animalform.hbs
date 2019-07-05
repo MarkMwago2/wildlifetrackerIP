@@ -1,13 +1,13 @@
  {{#partial "content"}}
-    <section class="new-animal">
-        <a href="/" class="redirect">Home</a>
-        <section class="normal-animal " id="normal">
+<!--    <section class="new-animal">-->
+<!--        <section class="normal-animal " id="normal">-->
             <h3>Normal Animal</h3>
-            <form action="/new-animal" method="post">
-                <input type="text" name="id" id="" placeholder="Animal Id" required>
+            <form action="/sightings" method="post">
+<!--                <input type="text" name="id" id="" placeholder="Animal Id" required>-->
                 <input type="text" name="name" id="" placeholder="Animal Name" required>
                 <input type="text" name="rangerName" placeholder="rangerName" required>
-                <input type="text" name="Sightinglocation" placeholder="location" required>
+                <input type="text" name="sightingLocation" placeholder="location" required>
+
                 <div class="age">
                     <p>Animal's Age</p>
                     <select name="animalAge" id="animalAge">
@@ -37,11 +37,8 @@
                 <hr>
                 <button type="submit" class="button">Submit</button>
 
-
-
-                <input type="submit" class="btn light">
             </form>
 
  {{/partial}}
 
-{{> layouts.hbs}}
+{{> layout.hbs}}
