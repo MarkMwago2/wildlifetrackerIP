@@ -1,80 +1,58 @@
 package models;
-import org.sql2o.*;
+import org.sql2o.Connection;
 
 import java.util.List;
 
-public class EndangeredAnimals extends Animals {
-    private String health;
-    private String age;
-
-    public static final String HEALTHY = "healthy";
-    public static final String ILL = "ill";
-    public static final String OKAY = "okay";
-
-    public static final String NEWBORN = "newborn";
-    public static final String YOUNG = "young";
-    public static final String ADULT = "adult";
-
-    public EndangeredAnimals(String name, String health, String age) {
+public class EndangeredAnimals extends  Animals {
+    private static final String ANIMAL_TYPE = "endangered";
+    public EndangeredAnimals(String name, String age, String health, String type) {
+{
+        if (name.equals("")) {
+            throw new IllegalArgumentException("Please enter a name");
+        }
+        if (age.equals("")) {
+            throw new IllegalArgumentException("Please enter the age of the animal");
+        }
+        if (health.equals("")) {
+            throw new IllegalArgumentException("Please enter the health status of the animal");
+        }
         this.name = name;
-        this.health = health;
         this.age = age;
-        endangered = true;
-    }
+        this.health = health;
+        this.type = ANIMAL_TYPE;
+    }}
 
-    public String getName() {
-        return name;
-    }
 
-    public String getHealth() {
-        return health;
-    }
-
-    public String getAge() {
-        return age;
-    }
 
     @Override
-    public void save() {
-        super.save();
-        try (Connection connect = DB.sql2o.open()) {
-            String sql = "UPDATE animals SET health=:health, age=:age WHERE id=:id";
-            connect.createQuery(sql, true)
-                    .addParameter("health", this.health)
+    public boolean equals(Object otherAnimal){
+        if(!(otherAnimal instanceof Object)){
+            return false;
+        }
+        Animals myAnimal = (Animals) otherAnimal;
+        return this.getName().equals(myAnimal.getName())&&
+                this.getType().equals(myAnimal.getType())&&
+                this.getId()==myAnimal.getId() ;
+
+    }
+    @Override
+    public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
                     .addParameter("age", this.age)
-                    .addParameter("id", this.id)
-                    .executeUpdate();
+                    .addParameter("health", this.health)
+                    .addParameter("type", this.type)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+    public static List<EndangeredAnimals> all(){
+        String sql = "SELECT * FROM animals WHERE type='endangered'";
+        try(org.sql2o.Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(EndangeredAnimals.class);
         }
     }
 
-    public static List<EndangeredAnimals> all() {
-        String sql = "SELECT * FROM animals;";
-        try (Connection connect = DB.sql2o.open()) {
-            return connect.createQuery(sql).executeAndFetch(EndangeredAnimals.class);
-        }
-    }
-
-    public static EndangeredAnimals find(int id) {
-        try (Connection connect = DB.sql2o.open()) {
-            String sql = "SELECT * FROM animals WHERE id= :id;";
-            EndangeredAnimals animal = connect.createQuery(sql)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetchFirst(EndangeredAnimals.class);
-            if (animal == null) {
-                throw new IndexOutOfBoundsException("Sorry, this animal cannot be found.");
-            }
-            return animal;
-        }
-    }
-
-    public void update(String name, String health) {
-        try (Connection connect = DB.sql2o.open()) {
-            String sql = "UPDATE animals SET (name, health) = (:name, :health) WHERE id = :id;";
-            connect.createQuery(sql)
-                    .addParameter("name", name)
-                    .addParameter("health", health)
-                    .executeUpdate();
-        }
-    }
 }

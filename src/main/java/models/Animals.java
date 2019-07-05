@@ -2,49 +2,88 @@ package models;
 
 import org.sql2o.Connection;
 
-import org.sql2o.*;
-import java.util.ArrayList;
-import java.util.List;
+public class Animals {
+    protected String name;
+    protected String age;
+    protected String health;
+    protected String type;
+    protected int id;
 
+//    public Animals(String name, String age, String health, String type, int id) {
+//        this.name = name;
+//        this.age = age;
+//        this.health = health;
+//        this.type = type;
+//        this.id = id;
+//    /}
 
-public abstract class Animals {
-    public int id;
-    public String name;
-    public boolean endangered;
+    public String getName() {
+        return name;
+    }
 
+    //Method to get Age of Animal
+    public String getAge() {
+        return age;
+    }
 
+    //Method to get health of animal
+    public String getHealth() {
+        return health;
+    }
+
+    //Method to get Type0
+    public String getType() {
+        return type;
+    }
 
     public int getId() {
         return id;
     }
-    public String getName() {
-        return name;
-    }
-    public boolean getEndangered(){
-        return endangered;
-    }
+
     @Override
-    public boolean equals(Object otherAnimal){
-        if(!(otherAnimal instanceof Animals)){
+    public boolean equals(Object otherAnimal) {
+        if (!(otherAnimal instanceof Object)) {
             return false;
         }
-        else{
-            Animals newAnimal = (Animals) otherAnimal;
-            return this.getName().equals(newAnimal.getName()) &&
-                    this.getId()==(newAnimal.getId());
-        }
+        Animals myAnimal = (Animals) otherAnimal;
+        return this.getName().equals(myAnimal.getName()) &&
+                this.getType().equals(myAnimal.getType()) &&
+//                this.getId() == myAnimal.getId() &&
+                this.getAge() == myAnimal.getAge() &&
+                this.getHealth().equals(myAnimal.getHealth());
     }
-    public void save(){
-        if (name.equals("") ) {
-            throw new IllegalArgumentException("Please enter a name.");
-        }
-        try(Connection connect = DB.sql2o.open()){
-            String sql = "INSERT INTO animals (name, endangered) VALUES (:name, :endangered);";
-            this.id = (int) connect.createQuery(sql, true)
+
+    //Method for saving
+    public void save() {
+        try (org.sql2o.Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("endangered", this.endangered)
+                    .addParameter("age", this.age)
+                    .addParameter("health", this.health)
+                    .addParameter("type", this.type)
+                    .throwOnMappingFailure(false)
                     .executeUpdate()
                     .getKey();
         }
+
+    }
+
+    //Method to Find Id
+    public static Animals find(int id) {
+        String sql = "SELECT * FROM animals WHERE id = :id;";
+        try (Connection con = DB.sql2o.open()) {
+            Animals myAnimal = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Animals.class);
+            return myAnimal;
+
+        }
+
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

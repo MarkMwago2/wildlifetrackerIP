@@ -1,29 +1,59 @@
 package models;
 
+import org.sql2o.Connection;
+
 import java.util.List;
-import org.sql2o.*;
-public class NonEndangered extends Animals{
-    public NonEndangered(String name){
+
+public class NonEndangered extends Animals  {
+    private static final String ANIMAL_TYPE = "nonendangered";
+    public NonEndangered (String name, String age, String health, String type){
+
+        if (name.equals("")) {
+            throw new IllegalArgumentException("Enter animal name");
+        }
+        if (age.equals("")) {
+            throw new IllegalArgumentException("Enter animal age");
+        }
+        if (health.equals("")) {
+            throw new IllegalArgumentException("Enter animal health");
+        }
         this.name = name;
-        endangered = false;
+        this.age = age;
+        this.health = health;
+        this.type = ANIMAL_TYPE;
+
+
     }
-    public static List<NonEndangered> all() {
-        String sql = "SELECT * FROM animals WHERE endangered = 'false'";
-        try(Connection connect = DB.sql2o.open()) {
-            return connect.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(NonEndangered.class);
+    @Override
+    public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animal (name, age, health, type) VALUES (:name, :age, :health, :type);";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
+                    .addParameter("age", this.age)
+                    .addParameter("health", this.health)
+                    .addParameter("type", this.type)
+                    .executeUpdate()
+                    .getKey();
         }
     }
-    public static NonEndangered find(int id){
-        try(Connection connect = DB.sql2o.open()){
-            String sql = "SELECT * FROM animals WHERE id= :id;";
-            NonEndangered animal = connect.createQuery(sql)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetchFirst(NonEndangered.class);
-            if (animal == null) {
-                throw new IndexOutOfBoundsException("Sorry, this animal cannot be found.");
-            }
-            return animal;
+    @Override
+    public boolean equals(Object otherAnimal){
+        if(!(otherAnimal instanceof Object)){
+            return false;
+        }
+        Animals myAnimal = (Animals) otherAnimal;
+        return this.getName().equals(myAnimal.getName())&&
+                this.getType().equals(myAnimal.getType())&&
+                this.getId()==myAnimal.getId() ;
+
+    }
+    public static List<NonEndangered> all(){
+        String sql = "SELECT * FROM animal WHERE type='safe'";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(NonEndangered.class);
         }
     }
+
+
 }

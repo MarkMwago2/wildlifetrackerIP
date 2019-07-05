@@ -1,54 +1,70 @@
 package models;
 
-import org.junit.*;
-import static org.junit.Assert.*;
-import org.sql2o.*;
-import java.util.List;
+import org.junit.Rule;
+import org.junit.Test;
 
-public class EndangeredAnimalsTest{
+import static org.junit.Assert.*;
+
+public class EndangeredAnimalsTest {
     @Rule
     public DatabaseRules database = new DatabaseRules();
     @Test
-    public void endangered_instantiatesCorrectly_true(){
-        EndangeredAnimals testAnimal = new EndangeredAnimals("lion","okay", "young");
-        assertEquals(testAnimal instanceof EndangeredAnimals, true);
+    public void EndangeredAnimals_InstantiatesCorrectly_true(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("panther","young","weak","");
+        assertEquals(true, myEndangeredAnimal instanceof EndangeredAnimals);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void animal_InstantiatesWithName_panther(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("","","","");
+        assertEquals("panther", myEndangeredAnimal.getName());
+    }
+
+    // test to see if animal instantiates with an age and if an error is thrown
+    @Test (expected = IllegalArgumentException.class)
+    public void EndangeredeAnimal_InstantiatesWithAge_mature(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("","","","");
+    }
+
+    // test to see if animal instantiates with the health status and if an error is thrown
+    @Test (expected = IllegalArgumentException.class)
+    public void EndangeredAnimal_InstantiatesWithHealth_Weak(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("","","","");
+    }
+    //test to check if info is saved into database
+    @Test
+    public void EndangeredAnimal_IsSavedInDatabase(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("panther", "adult", "healthy","endangered");
+        myEndangeredAnimal.save();
+        assertTrue(myEndangeredAnimal.all().get(0).equals(myEndangeredAnimal));
+    }
+    //Test to find Animal with the Same Id
+    public void find_WillReturnEndangeredAnimalWithTheSame_SecondAnimal(){
+        EndangeredAnimals firstEndangeredAnimal = new EndangeredAnimals("panther", "adult", "healthy","endangered");
+        firstEndangeredAnimal.save();
+        EndangeredAnimals SecondEndangeredAnimal = new EndangeredAnimals("panther", "adult", "healthy","endangered");
+        SecondEndangeredAnimal.save();
+        assertEquals(EndangeredAnimals.find(SecondEndangeredAnimal.getId()), SecondEndangeredAnimal);
+    }
+    //Animal is assigined an Id
+    @Test
+    public void EndangeredAnimal_AnimalIsAssingnedAnID_getid(){
+        EndangeredAnimals myEndangeredAnimal = new EndangeredAnimals("panther", "adult", "healthy","endangered");
+        myEndangeredAnimal.save();
+        EndangeredAnimals testEndangeredAnimals = EndangeredAnimals.all().get(0);
+        assertEquals(myEndangeredAnimal.getId(), testEndangeredAnimals.getId());
     }
     @Test
-    public void endangered_instantiatesWithAnimalName_String(){
-        EndangeredAnimals testAnimal = new EndangeredAnimals("lion","okay", "young");
-        assertEquals("lion", testAnimal.getName());
+    public void EndangeredAnimal_AllInstancesOfAnimalAreReturned_True(){
+        EndangeredAnimals myEndangeredAnimal1 = new EndangeredAnimals("panther", "adult", "healthy","endangered");
+        myEndangeredAnimal1.save();
+        EndangeredAnimals myEndangeredAnimal2 = new EndangeredAnimals("Black Rhino", "adult", "healthy","endangered");
+        myEndangeredAnimal2.save();
+        assertTrue(EndangeredAnimals.all().get(0).equals(myEndangeredAnimal1));
+        assertTrue(EndangeredAnimals.all().get(1).equals(myEndangeredAnimal2));
     }
-    @Test
-    public void endangered_instantiatesWIthAnimalHealth_String(){
-        EndangeredAnimals testAnimal = new EndangeredAnimals("lion","okay", "young");
-        assertEquals("okay", testAnimal.getHealth());
-    }
-    @Test
-    public void endangered_instantiatesWithAgeOfAnimal_String(){
-        EndangeredAnimals testAnimal = new EndangeredAnimals("lion","okay", "young");
-        assertEquals("young", testAnimal.getAge());
-    }}
-//    @Test
-//    public void save_savesEndangeredAnimalObjectsIntoDB(){
-//        EndangeredAnimals testAnimal = new EndangeredAnimals("lion","okay", "young");
-//        testAnimal.save();
-//        assertTrue(EndangeredAnimals.all().get(0).equals(testAnimal));
-//    }
-//    @Test
-//    public void all_returnsAllInstancesOfEndangeredAnimals_true(){
-//        EndangeredAnimals firstAnimal = new EndangeredAnimals("lion","okay", "young");
-//        firstAnimal.save();
-//        EndangeredAnimals secondAnimal = new EndangeredAnimals("snake","healthy", "adult");
-//        secondAnimal.save();
-//        assertEquals(true, EndangeredAnimals.all().get(0).equals(firstAnimal));
-//        assertEquals(true, EndangeredAnimals.all().get(1).equals(secondAnimal));
-//    }
-//    @Test
-//    public void find_returnsEndangeredAnimalWithSameId_secondAnimal(){
-//        EndangeredAnimals firstAnimal = new EndangeredAnimals("lion","okay", "young");
-//        firstAnimal.save();
-//        EndangeredAnimals secondAnimal = new EndangeredAnimals("snake","healthy", "adult");
-//        secondAnimal.save();
-//        assertEquals(EndangeredAnimals.find(secondAnimal.getId()), secondAnimal);
-//    }
-//}
+
+
+
+
+
+}

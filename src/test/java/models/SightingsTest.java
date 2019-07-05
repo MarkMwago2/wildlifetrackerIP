@@ -1,69 +1,48 @@
 package models;
 
-import org.junit.*;
-import static org.junit.Assert.*;
-import org.sql2o.*;
+import org.junit.Rule;
+import org.junit.Test;
 
-import java.sql.Timestamp;
+import static org.junit.Assert.*;
 
 public class SightingsTest {
     @Rule
     public DatabaseRules database = new DatabaseRules();
+
     @Test
-    public void Sightings_instantiatesCorrectly_true(){
-        Sightings testSighting = new Sightings("area 1", "Vick",1);
-        assertEquals(testSighting instanceof Sightings, true);
+    public void Sighting_InstantiatesCorrectly_True(){
+        Sightings newsighting = new Sightings("Allois","Zone 1",3);
+        assertTrue( newsighting instanceof Sightings);
     }
     @Test
-    public void getLocation_instantiatesWithLocation_String(){
-        Sightings testSighting = new Sightings("area 1", "Vick",1);
-        assertEquals("area 1", testSighting.getLocation());
+    public void Sighting_IsSavedOnDataBase_True(){
+        Sightings newSighting = new Sightings("Allois","Zone 2",2);
+        newSighting.save();
+        assertTrue(Sightings.all().get(0).equals(newSighting));
     }
     @Test
-    public void getLocation_instantiatesWithRangerName_String() {
-        Sightings testSighting = new Sightings("area 1", "Vick", 1);
-        assertEquals("Vick", testSighting.getRangerName());
+    public void sighting_EachSigthingIsAssignedAnId_getid(){
+        Sightings newSighting = new Sightings("Gordon","Zone 2",1);
+        newSighting.save();
+        Sightings testSighting = Sightings.all().get(0);
+        assertEquals(newSighting.getId(), testSighting.getId());
     }
     @Test
-    public void getLocation_instantiatesWithAnimalId_int() {
-        Sightings testSighting = new Sightings("area 1", "Vick", 1);
-        assertEquals(1, testSighting.getAnimalId());
-    }
-    @Test
-    public void equals_returnsTrueIfSightingsObjectsAreTrue_true(){
-        Sightings firstSighting = new Sightings("area 1", "Vick", 1);
-        Sightings secondSighting = new Sightings("area 1", "Vick", 1);
-        assertTrue(firstSighting.equals(secondSighting));
-    }
-    @Test
-    public void save_savesSightingsObjectsIntoDatabase(){
-        Sightings testSighting = new Sightings("area 1", "Vick", 1);
-        testSighting.save();
-        assertEquals(true, Sightings.all().get(0).equals(testSighting));
-    }
-    @Test
-    public void all_returnsAllObjectsOfSightingsClass_true(){
-        Sightings firstSighting = new Sightings("area 1", "Vick",1);
+    public void find_WillReturnSightingWithTheSameID_SecondSighting(){
+        Sightings firstSighting = new Sightings("Jaeger","Zone 2",1);
         firstSighting.save();
-        Sightings secondSighting = new Sightings("area 2", "Jane",2);
-        secondSighting.save();
-        assertEquals(true, Sightings.all().get(0).equals(firstSighting));
-        assertEquals(true, Sightings.all().get(1).equals(secondSighting));
+        Sightings SecondSighting = new Sightings("Mexes","Zone 5",3);
+        SecondSighting.save();
+        assertEquals(SecondSighting, Sightings.find(SecondSighting.getId()));
     }
     @Test
-    public void save_assignsIdToSavedObject(){
-        Sightings testSighting = new Sightings("area 1", "Vick", 1);
-        testSighting.save();
-        Sightings savedSighting = Sightings.all().get(0);
-        assertEquals(testSighting.getId(), savedSighting.getId());
+    public void Sightings_CanBeDeletedFromDataBase_true() {
+        Sightings newSighting = new Sightings("Brahimi","Zone 5",1);
+        newSighting.save();
+        newSighting.delete();
+        assertEquals(0, Sightings.all().size());
     }
-    @Test
-    public void find_returnsAllObjectsWithProvidedId_secondSighting(){
-        Sightings firstSighting = new Sightings("area 1", "Vick",1);
-        firstSighting.save();
-        Sightings secondSighting = new Sightings("area 2", "Jane",2);
-        secondSighting.save();
-        assertEquals(Sightings.find(secondSighting.getId()), secondSighting);
-    }
+
+
 
 }
